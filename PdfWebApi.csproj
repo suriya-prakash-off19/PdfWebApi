@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <Reference Include="PDFProcessorLibrary">
+      <HintPath>Processor\PDFProcessorLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="PDFClown">
+      <HintPath>Processor\PDFClown.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="itext.kernel">
+      <HintPath>Processor\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io">
+      <HintPath>Processor\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout">
+      <HintPath>Processor\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.commons">
+      <HintPath>Processor\itext.commons.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>Processor\BouncyCastle.Crypto.dll</HintPath>
+    </Reference><Reference Include="BouncyCastle.Cryptography">
+      <HintPath>Processor\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference><Reference Include="itext.barcodes">
+      <HintPath>Processor\itext.barcodes.dll</HintPath>
+    </Reference><Reference Include="itext.bouncy-castle-adapter">
+      <HintPath>Processor\itext.bouncy-castle-adapter.dll</HintPath>
+    </Reference><Reference Include="itext.bouncy-castle-connector">
+      <HintPath>Processor\itext.bouncy-castle-connector.dll</HintPath>
+    </Reference><Reference Include="itext.forms">
+      <HintPath>Processor\itext.forms.dll</HintPath>
+    </Reference><Reference Include="itext.pdfua">
+      <HintPath>Processor\itext.pdfua.dll</HintPath>
+    </Reference><Reference Include="itext.sign">
+      <HintPath>Processor\itext.sign.dll</HintPath>
+    </Reference><Reference Include="itext.styledxmlparser">
+      <HintPath>Processor\itext.styledxmlparser.dll</HintPath>
+    </Reference><Reference Include="itext.svg">
+      <HintPath>Processor\itext.svg.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

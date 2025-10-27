@@ -1,0 +1,312 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "PdfWebApi/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.OpenApi": "9.0.10",
+          "Newtonsoft.Json": "13.0.4",
+          "BouncyCastle.Crypto": "1.8.9.0",
+          "BouncyCastle.Cryptography": "2.0.0.0",
+          "itext.barcodes": "9.0.0.0",
+          "itext.bouncy-castle-adapter": "9.0.0.0",
+          "itext.bouncy-castle-connector": "9.0.0.0",
+          "itext.commons": "9.0.0.0",
+          "itext.forms": "9.0.0.0",
+          "itext.io": "9.0.0.0",
+          "itext.kernel": "9.0.0.0",
+          "itext.layout": "9.0.0.0",
+          "itext.pdfua": "9.0.0.0",
+          "itext.sign": "9.0.0.0",
+          "itext.styledxmlparser": "9.0.0.0",
+          "itext.svg": "9.0.0.0",
+          "PDFClown": "0.1.2.0",
+          "PDFProcessorLibrary": "1.0.1.1"
+        },
+        "runtime": {
+          "PdfWebApi.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.OpenApi/9.0.10": {
+        "dependencies": {
+          "Microsoft.OpenApi": "1.6.17"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.AspNetCore.OpenApi.dll": {
+            "assemblyVersion": "9.0.10.0",
+            "fileVersion": "9.0.1025.47517"
+          }
+        }
+      },
+      "Microsoft.OpenApi/1.6.17": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.OpenApi.dll": {
+            "assemblyVersion": "1.6.17.0",
+            "fileVersion": "1.6.17.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.4": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.4.30916"
+          }
+        }
+      },
+      "BouncyCastle.Crypto/1.8.9.0": {
+        "runtime": {
+          "BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.8.9.0",
+            "fileVersion": "1.8.20343.1"
+          }
+        }
+      },
+      "BouncyCastle.Cryptography/2.0.0.0": {
+        "runtime": {
+          "BouncyCastle.Cryptography.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.4.0.33771"
+          }
+        }
+      },
+      "itext.barcodes/9.0.0.0": {
+        "runtime": {
+          "itext.barcodes.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.bouncy-castle-adapter/9.0.0.0": {
+        "runtime": {
+          "itext.bouncy-castle-adapter.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.bouncy-castle-connector/9.0.0.0": {
+        "runtime": {
+          "itext.bouncy-castle-connector.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.commons/9.0.0.0": {
+        "runtime": {
+          "itext.commons.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.forms/9.0.0.0": {
+        "runtime": {
+          "itext.forms.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.io/9.0.0.0": {
+        "runtime": {
+          "itext.io.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.kernel/9.0.0.0": {
+        "runtime": {
+          "itext.kernel.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.layout/9.0.0.0": {
+        "runtime": {
+          "itext.layout.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.pdfua/9.0.0.0": {
+        "runtime": {
+          "itext.pdfua.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.sign/9.0.0.0": {
+        "runtime": {
+          "itext.sign.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.styledxmlparser/9.0.0.0": {
+        "runtime": {
+          "itext.styledxmlparser.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "itext.svg/9.0.0.0": {
+        "runtime": {
+          "itext.svg.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      },
+      "PDFClown/0.1.2.0": {
+        "runtime": {
+          "PDFClown.dll": {
+            "assemblyVersion": "0.1.2.0",
+            "fileVersion": "0.1.2.0"
+          }
+        }
+      },
+      "PDFProcessorLibrary/1.0.1.1": {
+        "runtime": {
+          "PDFProcessorLibrary.dll": {
+            "assemblyVersion": "1.0.1.1",
+            "fileVersion": "1.0.1.1"
+          }
+        }
+      },
+      "itext.pdfa/9.0.0.0": {
+        "runtime": {
+          "itext.pdfa.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PdfWebApi/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.AspNetCore.OpenApi/9.0.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yAv5EDEi0Nkk75Vhxh6ppuXd/QIO8hzjGpAt/fGInMZWIX/mVwZ1IM50YFIWeLCVM8KDj0oFPQdcLeQ+9hEJsw==",
+      "path": "microsoft.aspnetcore.openapi/9.0.10",
+      "hashPath": "microsoft.aspnetcore.openapi.9.0.10.nupkg.sha512"
+    },
+    "Microsoft.OpenApi/1.6.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Le+kehlmrlQfuDFUt1zZ2dVwrhFQtKREdKBo+rexOwaCoYP0/qpgT9tLxCsZjsgR5Itk1UKPcbgO+FyaNid/bA==",
+      "path": "microsoft.openapi/1.6.17",
+      "hashPath": "microsoft.openapi.1.6.17.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pdgNNMai3zv51W5aq268sujXUyx7SNdE2bj1wZcWjAQrKMFZV260lbqYop1d2GM67JI1huLRwxo9ZqnfF/lC6A==",
+      "path": "newtonsoft.json/13.0.4",
+      "hashPath": "newtonsoft.json.13.0.4.nupkg.sha512"
+    },
+    "BouncyCastle.Crypto/1.8.9.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BouncyCastle.Cryptography/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.barcodes/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.bouncy-castle-adapter/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.bouncy-castle-connector/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.commons/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.forms/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.io/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.kernel/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.layout/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.pdfua/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.sign/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.styledxmlparser/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.svg/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PDFClown/0.1.2.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PDFProcessorLibrary/1.0.1.1": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itext.pdfa/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
