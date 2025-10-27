@@ -1,0 +1,56 @@
+# .NET Core
+bin/
+obj/
+*.csproj.user
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# NuGet Packages
+*.nupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Build artifacts
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rch64/
+*.pdb
+*.dll
+*.exe
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs and diagnostics
+*.log
+logs/
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Environment variables
+.env
+*.env.*
+
+# Publish output
+[Pp]ublish/
+wwwroot/
+
+# Rider (JetBrains IDE) specific
+.idea/
+*.sln.iml
