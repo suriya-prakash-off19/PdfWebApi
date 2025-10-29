@@ -46,20 +46,67 @@ noBtn.addEventListener('click', () => {
     popup.style.display = 'none';
 });
 
-function SavePdf() {
+let updatedPdfBuffer = null;
+// function SavePdf() {
 
-    const formData = new FormData();
-    formData.append("file", selectedFile);
-    const res = fetch("https://localhost:7040/api/home/Save", {
-        method: "POST",
-        body: formData
-    });
+//     const formData = new FormData();
+//     formData.append("file", selectedFile);
+//     const res = fetch("https://localhost:7040/api/home/Save", {
+//         method: "POST",
+//         body: formData
+//     });
 
-    // const res = fetch("http://localhost:5001/Save", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ fileName: "UpdatedPDF", fileData: "updatedpdfstring" })
-    // });
+//     // const res = fetch("http://localhost:5001/Save", {
+//     //     method: "POST",
+//     //     headers: { "Content-Type": "application/json" },
+//     //     body: JSON.stringify({ fileName: "UpdatedPDF", fileData: "updatedpdfstring" })
+//     // });
+// }
+
+async function SavePdf() {
+    try {
+        // ✅ Check if you have modified PDF data (ArrayBuffer or Uint8Array)
+        if (!updatedPdfBuffer && !selectedFile) {
+            alert("No PDF data available to save!");
+            return;
+        }
+
+        const formData = new FormData();
+
+        // alert(updatedPdfBuffer instanceof ArrayBuffer, updatedPdfBuffer.byteLength);
+        if (updatedPdfBuffer) {
+            // console.log("updatedPdfBuffer:", updatedPdfBuffer);
+            // console.log("Type:", updatedPdfBuffer.constructor.name);
+            console.log("Size:", updatedPdfBuffer?.byteLength);
+            // Convert ArrayBuffer → File so it behaves like uploaded file
+            const modifiedFile = new File(
+                [updatedPdfBuffer],
+                selectedFile ? "Modified_" + selectedFile.name : "Modified.pdf",
+                { type: "application/pdf" }
+            );
+
+            formData.append("file", modifiedFile);
+            //formData.append("file", new File([updatedPdfBuffer], "Modified.pdf", { type: "application/pdf" }));
+
+        } else {
+            // Fallback to original file if nothing modified
+            formData.append("file", selectedFile);
+        }
+
+        // ✅ Send via fetch
+        const res = await fetch("https://localhost:7040/api/home/save", {
+            method: "POST",
+            body: formData
+        });
+
+        if (res.ok) {
+            console.log("✅ Modified PDF uploaded successfully");
+        } else {
+            console.error("❌ Upload failed:", res.status, res.statusText);
+        }
+    } catch (err) {
+        console.error("⚠️ Error saving PDF:", err);
+    }
 }
 
 
@@ -198,31 +245,116 @@ async function renderPage(num, center = false) {
 let images = [];
 let currentIndex = 0;
 
-async function sendPdf() {
-    if (!selectedFile) { alert("Choose PDF to View"); return; }
+// async function sendPdf() {
+//     if (!selectedFile) { alert("Choose PDF to View"); return; }
 
-    // const arrayBuffer = await selectedFile.arrayBuffer();
-    // const byteArray = new Uint8Array(arrayBuffer);
-    // let binary = '';
-    // for (let i = 0; i < byteArray.length; i++) { binary += String.fromCharCode(byteArray[i]); }
-    // const base64String = btoa(binary);
-    // updatedpdfstring = btoa(binary);
-    // const res = await fetch("http://localhost:5001/upload", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ fileName: selectedFile.name, fileData: base64String })
-    // });
+//     showLoading();
+//     try {
+//         const formData = new FormData();
+//         formData.append("file", selectedFile);
+//         const res = await fetch("https://localhost:7040/api/home/upload", {
+//             method: "POST",
+//             body: formData
+//         });
+
+//         const data = await res.json();
+
+//         const listContainer = document.getElementById("layercheckboxList");
+//         listContainer.innerHTML = "";
+//         (data.layerNames || []).forEach(item => {
+//             const label = document.createElement("label");
+//             label.style.display = "inline-block";
+//             label.style.fontSize = "17px";
+//             label.style.marginTop = "4px";
+//             const checkbox = document.createElement("input");
+//             checkbox.type = "checkbox";
+//             checkbox.value = item;
+//             checkbox.checked = true;
+//             //checkbox.addEventListener("change", updateLayerSelection);
+//             checkbox.addEventListener("change", () => debounceUpdate(updateLayerSelection));
+//             label.appendChild(checkbox);
+//             label.appendChild(document.createTextNode(" " + item));
+//             listContainer.appendChild(label);
+//             listContainer.appendChild(document.createElement("br"));
+//         });
+
+//         const listContainer2 = document.getElementById("colorcheckboxList");
+//         listContainer2.innerHTML = "";
+//         (data.colorNames || []).forEach(item => {
+//             const label = document.createElement("label");
+//             label.style.display = "inline-block";
+//             label.style.fontSize = "17px";
+//             label.style.marginTop = "4px";
+//             const checkbox = document.createElement("input");
+//             checkbox.type = "checkbox";
+//             checkbox.value = item;
+//             checkbox.checked = true;
+//             //checkbox.addEventListener("change", updateColorSelection);
+//             checkbox.addEventListener("change", () => debounceUpdate(updateColorSelection));
+//             label.appendChild(checkbox);
+//             label.appendChild(document.createTextNode(" " + item));
+//             listContainer2.appendChild(label);
+//             listContainer2.appendChild(document.createElement("br"));
+//         });
+//     } catch (err) {
+//         console.error(err);
+//     } finally {
+//         hideLoading(); // hide spinner after processing
+//     }
+// }
+
+async function sendPdf() {
+    if (!selectedFile) {
+        alert("Choose PDF to View");
+        return;
+    }
+
     showLoading();
+
     try {
-        const formData = new FormData();
-        formData.append("file", selectedFile);
-        const res = await fetch("https://localhost:7040/api/home/upload", {
+        const CHUNK_SIZE = 50 * 1024 * 1024; // 50 MB per chunk (adjust as needed)
+        const totalChunks = Math.ceil(selectedFile.size / CHUNK_SIZE);
+        const uploadId = Date.now().toString(); // Unique ID for this upload
+
+        for (let index = 0; index < totalChunks; index++) {
+            const start = index * CHUNK_SIZE;
+            const end = Math.min(start + CHUNK_SIZE, selectedFile.size);
+            const chunk = selectedFile.slice(start, end);
+
+            const formData = new FormData();
+            formData.append("file", chunk);
+            formData.append("fileName", selectedFile.name);
+            formData.append("uploadId", uploadId);
+            formData.append("chunkIndex", index);
+            formData.append("totalChunks", totalChunks);
+
+            const res = await fetch("https://localhost:7040/api/home/uploadChunk", {
+                method: "POST",
+                body: formData
+            });
+
+            if (!res.ok) {
+                throw new Error(`Chunk ${index + 1} upload failed: ${res.statusText}`);
+            }
+
+            console.log(`✅ Uploaded chunk ${index + 1}/${totalChunks}`);
+        }
+
+        // 🔁 After all chunks uploaded, call merge endpoint
+        const mergeRes = await fetch("https://localhost:7040/api/home/mergeChunks", {
             method: "POST",
-            body: formData
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                fileName: selectedFile.name,
+                uploadId: uploadId
+            })
         });
 
-        const data = await res.json();
+        if (!mergeRes.ok) throw new Error("Merge failed");
 
+        const data = await mergeRes.json();
+
+        // ✅ Continue your normal PDF loading flow
         const listContainer = document.getElementById("layercheckboxList");
         listContainer.innerHTML = "";
         (data.layerNames || []).forEach(item => {
@@ -234,7 +366,6 @@ async function sendPdf() {
             checkbox.type = "checkbox";
             checkbox.value = item;
             checkbox.checked = true;
-            //checkbox.addEventListener("change", updateLayerSelection);
             checkbox.addEventListener("change", () => debounceUpdate(updateLayerSelection));
             label.appendChild(checkbox);
             label.appendChild(document.createTextNode(" " + item));
@@ -253,17 +384,18 @@ async function sendPdf() {
             checkbox.type = "checkbox";
             checkbox.value = item;
             checkbox.checked = true;
-            //checkbox.addEventListener("change", updateColorSelection);
             checkbox.addEventListener("change", () => debounceUpdate(updateColorSelection));
             label.appendChild(checkbox);
             label.appendChild(document.createTextNode(" " + item));
             listContainer2.appendChild(label);
             listContainer2.appendChild(document.createElement("br"));
         });
+
     } catch (err) {
-        console.error(err);
+        console.error("⚠️ Upload failed:", err);
+        alert("Upload failed: " + err.message);
     } finally {
-        hideLoading(); // hide spinner after processing
+        hideLoading();
     }
 }
 
@@ -300,7 +432,7 @@ async function updateLayerSelection() {
         });
 
         const arrayBuffer = await res.arrayBuffer(); // <— Directly get binary, no base64
-        updatedpdfstring = ""; // optional, no need to keep base64 anymore
+        updatedPdfBuffer = arrayBuffer.slice(0);
 
         const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
         const pdf = await loadingTask.promise;
@@ -342,7 +474,7 @@ async function updateColorSelection() {
         });
 
         const arrayBuffer = await res.arrayBuffer(); // <— Directly get binary, no base64
-        updatedpdfstring = ""; // optional, no need to keep base64 anymore
+        updatedPdfBuffer = arrayBuffer.slice(0);
 
         const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
         const pdf = await loadingTask.promise;
@@ -384,7 +516,7 @@ async function updateObjectRemoval() {
 
 
         const arrayBuffer = await res.arrayBuffer(); // <— Directly get binary, no base64
-        updatedpdfstring = ""; // optional, no need to keep base64 anymore
+        updatedPdfBuffer = arrayBuffer.slice(0);
 
         const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
         const pdf = await loadingTask.promise;
@@ -559,7 +691,8 @@ container.addEventListener('wheel', e => {
     }, 50); // adjust 30-50ms
 }, { passive: false });
 
-canvas.addEventListener('click', e => {
+canvas.addEventListener('click', e => {    
+        clickPoints.length = 0;
     if (!currentViewport) return;
     // get click position relative to canvas top-left (this already accounts for canvas.style.left/top)
     const rect = canvas.getBoundingClientRect();
